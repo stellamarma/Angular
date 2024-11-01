@@ -20,3 +20,16 @@
 <div class="container d-flex align-items-center w-100">
     <button class="btn btn-primary w-25 py-2" type="submit" (click)="addBook()">Add Book</button>
 </div>
+
+<div class="container d-flex align-items-center py-3 bg-body-tertiary ">
+    <h2>Book List</h2>
+</div>
+
+<div class="container d-flex align-items-center w-100">
+    <ul>
+      <li *ngFor="let book of retrieveBooks(); let i = index">
+        {{ book.title }} by {{ book.author }}
+        <button class="btn btn-danger w-50 py-2" (click)="deleteBook(i)">Delete</button>
+      </li>
+    </ul>
+</div>
