@@ -10,36 +10,60 @@ import { FormsModule } from '@angular/forms';
 export class BookComponent {
   bookTitle: string = '';
   bookAuthor: string = '';
+  books: any[] = []; // Stores the list of books to be displayed
 
-  // 1. Προσθήκη βιβλίου στο localStorage
+  ngOnInit() {
+    // Load books from localStorage on component initialization
+    this.refreshBookList();
+  }
+
+  // Generate a unique ID for each book
+  generateId(): string {
+    return '_' + Math.random().toString(36).substr(2, 9);
+  }
+
+  // 1. Add a book to localStorage
   addBook() {
-    const newBook = { title: this.bookTitle, author: this.bookAuthor };
-    let books = this.retrieveBooks();
+    if (this.bookTitle.trim() && this.bookAuthor.trim()) {  // Ensure inputs are not empty
+      const newBook = { id: this.generateId(), title: this.bookTitle, author: this.bookAuthor };
+      let books = this.retrieveBooks();
 
-    books.push(newBook);  // Προσθέτουμε το νέο βιβλίο στη λίστα
+      books.push(newBook);  // Add the new book to the list
 
-    // Αποθήκευση της λίστας στο localStorage
-    localStorage.setItem('books', JSON.stringify(books));
+      // Save updated list to localStorage
+      localStorage.setItem('books', JSON.stringify(books));
 
-    // Καθαρίζουμε τα πεδία εισαγωγής
-    this.bookTitle = '';
-    this.bookAuthor = '';
+      // Clear input fields
+      this.bookTitle = '';
+      this.bookAuthor = '';
+
+      // Refresh the displayed book list
+      this.refreshBookList();
+    }
   }
 
-  // 2. Ανάκτηση όλων των βιβλίων από το localStorage
-  retrieveBooks() {
+  // 2. Retrieve all books from localStorage
+  retrieveBooks(): any[] {
     const books = localStorage.getItem('books');
-    return books ? JSON.parse(books) : [];  // Επιστροφή λίστας βιβλίων ή κενής λίστας
+    return books ? JSON.parse(books) : [];  // Return list of books or an empty list
   }
 
-  // 3. Διαγραφή βιβλίου από το localStorage
-  deleteBook(index: number) {
+  // Refresh the displayed book list
+  refreshBookList() {
+    this.books = this.retrieveBooks();
+  }
+
+  // 3. Delete a book from localStorage
+  deleteBook(id: string) {
     let books = this.retrieveBooks();
 
-    // Αφαιρούμε το βιβλίο από τον πίνακα
-    books.splice(index, 1);
+    // Filter out the book with the given id
+    books = books.filter(book => book.id !== id);
 
-    // Ενημερώνουμε το localStorage
+    // Update localStorage
     localStorage.setItem('books', JSON.stringify(books));
+
+    // Refresh the displayed book list
+    this.refreshBookList();
   }
 }

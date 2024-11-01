@@ -29,7 +29,7 @@
     <ul>
       <li *ngFor="let book of retrieveBooks(); let i = index">
         {{ book.title }} by {{ book.author }}
-        <button class="btn btn-danger w-50 py-2" (click)="deleteBook(i)">Delete</button>
+        <button class="btn btn-danger w-50 py-2" (click)="deleteBook(book.id)">Delete</button>
       </li>
     </ul>
 </div>
