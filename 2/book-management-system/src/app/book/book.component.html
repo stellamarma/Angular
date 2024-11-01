@@ -1,14 +1,22 @@
-<form>
-    <div>
-      <label for="title">Title:</label>
-      <input type="text" id="title" [(ngModel)]="bookTitle" name="title">
+
+    <div class="container d-flex align-items-center py-3 bg-body-tertiary ">
+        <h1 >Please give info about book</h1>
     </div>
-  
-    <div>
-      <label for="author">Author:</label>
-      <input type="text" id="author" [(ngModel)]="bookAuthor" name="author">
+
+    <div class="container d-flex  form-floating align-items-center py-3 bg-body-tertiary w-100">
+            <div class="col-sm-6">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" [(ngModel)]="bookTitle" name="title">
+            
+            </div>
+        
+            <div class="col-sm-6">
+            <label for="author">Author:</label>
+            <input type="text" class="form-control" id="author" [(ngModel)]="bookAuthor" name="author">
+            </div>
+
+            
     </div>
-  
-    <button type="button" (click)="addBook()">Add Book</button>
-  </form>
-  
+<div class="container d-flex align-items-center w-100">
+    <button class="btn btn-primary w-25 py-2" type="submit" (click)="addBook()">Add Book</button>
+</div>
