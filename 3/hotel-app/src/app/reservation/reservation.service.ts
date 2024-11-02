@@ -24,6 +24,7 @@ export class ReservationService {
     this.reservations.splice(index,1);
   }
   updaetReservation(updateReservation: Reservation): void{
-    let index=this.reservations.findIndex(res=>res.id===updateReservation.id)
+    let index=this.reservations.findIndex(res=>res.id===updateReservation.id);
+    this.reservations[index]=updateReservation;
   }
 }
