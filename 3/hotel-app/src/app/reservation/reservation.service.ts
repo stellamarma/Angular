@@ -19,4 +19,8 @@ export class ReservationService {
   addReservation(reservation:Reservation):void{
     this.reservations.push(reservation);
   }
+  deleteReservation(id:string):void{
+    let index=this.reservations.findIndex(res=>res.id===id);
+    this.reservations.splice(index,1);
+  }
 }
