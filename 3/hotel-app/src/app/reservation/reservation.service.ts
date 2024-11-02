@@ -16,4 +16,7 @@ export class ReservationService {
   getReservation(id:string):  Reservation | undefined{
     return this.reservations.find(res=>res.id===id);
   }
+  addReservation(reservation:Reservation):void{
+    this.reservations.push(reservation);
+  }
 }
