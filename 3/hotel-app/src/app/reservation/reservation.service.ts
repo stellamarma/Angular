@@ -8,6 +8,10 @@ export class ReservationService {
 
   private reservations: Reservation[]=[];
 
+  constructor(){
+    let sevedReservation=localStorage.getItem("reservation");
+    this.reservations=sevedReservation?JSON.parse(sevedReservation):[];
+  }
   //CRUD
 
   getReservations():  Reservation[]{
@@ -18,14 +22,16 @@ export class ReservationService {
   }
   addReservation(reservation:Reservation):void{
     this.reservations.push(reservation);
-    console.log(this.reservations);
+    localStorage.setItem("reservation",JSON.stringify(this.reservations));
   }
   deleteReservation(id:string):void{
     let index=this.reservations.findIndex(res=>res.id===id);
     this.reservations.splice(index,1);
+    localStorage.setItem("reservation",JSON.stringify(this.reservations));
   }
   updaetReservation(updateReservation: Reservation): void{
     let index=this.reservations.findIndex(res=>res.id===updateReservation.id);
     this.reservations[index]=updateReservation;
+    localStorage.setItem("reservation",JSON.stringify(this.reservations));
   }
 }
