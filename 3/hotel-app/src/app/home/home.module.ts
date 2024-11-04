@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule
-  ], exports: [
+  ], exports: [//its important
     HomeComponent
   ]
 })
