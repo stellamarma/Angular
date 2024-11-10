@@ -5,7 +5,10 @@ import { BookReducer } from './books/book.reducer';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BookListComponent } from './book-list/book-list.component';
-
+import { AppState } from './app.state';
+import { EffectsModule } from '@ngrx/effects';
+import { BookEffects } from './books/book.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +17,9 @@ import { BookListComponent } from './book-list/book-list.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({book:BookReducer})
+    StoreModule.forRoot<AppState>({book:BookReducer}),
+    EffectsModule.forRoot([BookEffects]),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]
